@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+    <package name="default" extends="struts-default">
+        <interceptors>
+            <interceptor name="toUppercaseInterceptor" class="struts2.demo.interceptor.ToUppercaseInterceptor" />
+        </interceptors>
+        <default-interceptor-ref name="defaultStack"/>
+
+        <action name="login" class="struts2.demo.action.LoginAction">
+            <result name="input">welcome.jsp</result>
+            <result name="success">query.jsp</result>
+            <interceptor-ref name="store">
+                <param name="operationMode">RETRIEVE</param>
+            </interceptor-ref>
+            <interceptor-ref name="defaultStack"/>
+            <interceptor-ref name="toUppercaseInterceptor"/>
+        </action>
+        <action name="query" class="struts2.demo.action.QueryAction">
+            <result name="input">query.jsp</result>
+            <result name="success">result.jsp</result>
+        </action>
+    </package>
+</struts>
